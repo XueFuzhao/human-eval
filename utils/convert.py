@@ -15,7 +15,8 @@ output_data = []
 with open(input_file_path, 'r') as input_file:
     for line in input_file:
         example = json.loads(line.strip())
-        completion = example['output'].replace('<extra_id_0>', '')
+
+        completion = example['output'].replace('<extra_id_0>', ' ')
 
         completion = completion.replace("\t", "    ")
         completion = completion.lstrip("\n")
@@ -46,9 +47,13 @@ with open(input_file_path, 'r') as input_file:
 
         output_example = {
             'task_id': example['input']["task_id"],
-            'completion': completion
+            'completion':  completion
         }
-        print(output_example['completion'])
+        print("===============================")
+        print("Input:\n", example['input']['inputs_pretokenized'])
+        print("GroundTruth:\n", example['input']["targets_pretokenized"])
+        print("Cleaned:\n", output_example['completion'])
+        print("Before Cleam\n",example['output'])
 
         output_data.append(output_example)
 

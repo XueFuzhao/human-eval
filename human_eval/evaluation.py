@@ -86,6 +86,8 @@ def evaluate_functional_correctness(
     correct = np.array(correct)
 
     ks = k
+    # print(ks)
+    # print(total)
     pass_at_k = {f"pass@{k}": estimate_pass_at_k(total, correct, k).mean()
                  for k in ks if (total >= k).all()}
 
